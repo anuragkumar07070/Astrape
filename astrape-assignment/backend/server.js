@@ -25,6 +25,10 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/items', require('./routes/item'));
 app.use('/api/cart', require('./routes/cart'));
 
+app.get('/',(req,res)=>{
+  res.send("server is running...");
+})
+
 // Basic health check route
 app.get('/api/health', (req, res) => {
   res.json({ message: 'Server is running!' });
@@ -44,9 +48,7 @@ app.use((req, res) => {
   });
 });
 
-app.get('/',(req,res)=>{
-  res.send("server is running...");
-})
+
 
 const PORT = process.env.PORT || 5000;
 
