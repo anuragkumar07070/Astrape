@@ -11,9 +11,11 @@ connectDB();
 
 const app = express();
 
+const allowedOrigin = ['http://localhost:3000',"https://astrape-ten.vercel.app"];
+
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000',"https://astrape-ten.vercel.app/signup"], // frontend URL
+  origin: allowedOrigin, // frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // allowed HTTP methods
   credentials: true, // allow cookies/auth headers
 }));
