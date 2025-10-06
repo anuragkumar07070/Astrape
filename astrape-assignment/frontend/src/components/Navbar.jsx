@@ -31,12 +31,10 @@ const Navbar = () => {
       }
     };
 
-    // Add event listener when dropdown is open
     if (showUserDropdown) {
       document.addEventListener('mousedown', handleClickOutside);
     }
 
-    // Cleanup event listener
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -102,8 +100,27 @@ const Navbar = () => {
             </Link>
           </nav>
 
-          {/* User Menu */}
-          <div className="flex items-center space-x-4">
+          {/* Mobile & Desktop Actions */}
+          <div className="flex items-center space-x-2">
+            {/* Mobile Cart Icon - Visible only on mobile */}
+            <Link
+              to="/cart"
+              className={`md:hidden relative p-2 rounded-lg transition-all duration-200 ${
+                isActive('/cart')
+                  ? 'bg-blue-100 text-blue-700'
+                  : 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
+              }`}
+            >
+              <div className="relative">
+                <ShoppingCart className="w-6 h-6" />
+                {cartItemCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold animate-pulse">
+                    {cartItemCount > 99 ? '99+' : cartItemCount}
+                  </span>
+                )}
+              </div>
+            </Link>
+
             {/* Desktop User Dropdown */}
             <div className="hidden md:block relative" ref={dropdownRef}>
               <button
@@ -123,7 +140,7 @@ const Navbar = () => {
                 </div>
               </button>
 
-              {/* User Dropdown Menu */}
+              {/* Desktop User Dropdown Menu */}
               {showUserDropdown && (
                 <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50 animate-in slide-in-from-top-2 duration-200">
                   <div className="px-4 py-3 border-b border-gray-100">
